@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginTop="16dp"
+    app:cardCornerRadius="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="12dp">
+
+        <CheckBox
+            android:id="@+id/todo_item_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:buttonTint="#333"
+            android:checked="true" />
+
+        <LinearLayout
+            android:id="@+id/todo_title_and_worker_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/todo_item_checkbox"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/todo_item_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ToDoTitle"
+                android:textColor="#333"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/todo_item_worker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="ToDoWorker"
+                android:textColor="#333"
+                android:textSize="16dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/todo_item_edit_button"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_baseline_edit"
+                android:layout_marginRight="8dp"/>
+
+            <ImageView
+                android:id="@+id/todo_item_delete_button"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_baseline_delete" />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/todo_item_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/todo_title_and_worker_container"
+            android:layout_alignParentRight="true"
+            android:text="TodoDate"
+            android:textColor="#999"
+            android:textSize="16dp" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
