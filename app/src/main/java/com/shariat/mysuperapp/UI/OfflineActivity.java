@@ -13,7 +13,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.shariat.mysuperapp.Controller.DBHandler;
 import com.shariat.mysuperapp.Models.ToDo;
 import com.shariat.mysuperapp.R;
-import com.shariat.mysuperapp.utils.TodoRVAdapter;
+import com.shariat.mysuperapp.Utils.TodoRVAdapter;
 
 import java.util.ArrayList;
 

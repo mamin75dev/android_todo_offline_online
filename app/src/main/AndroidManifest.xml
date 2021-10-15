@@ -12,7 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MySuperApp">
-        <activity android:name=".UI.AddToDoOfflineActivity"></activity>
+        <activity android:name=".UI.HttpTestActivity"></activity>
+        <activity android:name=".UI.AddToDoOnlineActivity" />
+        <activity android:name=".UI.OnlineActivity" />
+        <activity android:name=".UI.AddToDoOfflineActivity" />
         <activity android:name=".UI.OfflineActivity" />
         <activity android:name=".UI.MainActivity">
             <intent-filter>

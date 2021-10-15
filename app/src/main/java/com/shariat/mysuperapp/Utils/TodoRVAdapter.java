@@ -1,4 +1,4 @@
-package com.shariat.mysuperapp.utils;
+package com.shariat.mysuperapp.Utils;
 
 import android.content.Context;
 import android.view.LayoutInflater;

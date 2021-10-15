@@ -29,8 +29,19 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:text="Use Online"
             android:background="@drawable/online_use_button"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/test_button"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:text="Use Test"
+            android:background="@drawable/test_button"
             />
 
     </LinearLayout>

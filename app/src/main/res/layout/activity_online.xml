@@ -4,17 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.OfflineActivity"
+    tools:context=".UI.OnlineActivity"
     android:paddingBottom="16dp"
+    android:padding="16dp"
     android:background="#333">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/todos_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/todos_recycler_view_online"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent" />-->
+
+
+    <TextView
+        android:id="@+id/response_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:text="hello"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addTodo"
+        android:id="@+id/add_todo_online"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -22,7 +32,7 @@
         android:layout_marginRight="16dp"
         android:src="@drawable/ic_baseline_add"
         android:tint="#fff"
-        app:backgroundTint="@color/offline"
+        app:backgroundTint="@color/online"
         app:tint="#fff" />
 
 </RelativeLayout>

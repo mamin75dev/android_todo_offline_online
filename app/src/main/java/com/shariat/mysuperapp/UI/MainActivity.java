@@ -11,25 +11,25 @@ import com.shariat.mysuperapp.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-  AppCompatButton onlineUseButton, offlineUseButton;
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    onlineUseButton = findViewById(R.id.online);
-    offlineUseButton = findViewById(R.id.offline);
-    offlineUseButton.setOnClickListener(this);
+    findViewById(R.id.online).setOnClickListener(this);
+    findViewById(R.id.offline).setOnClickListener(this);
+    findViewById(R.id.test_button).setOnClickListener(this);
   }
 
   @Override
   public void onClick(View v) {
     switch (v.getId()) {
       case R.id.online:
+        startActivity(new Intent(MainActivity.this, OnlineActivity.class));
         break;
       case R.id.offline:
-        Intent intent = new Intent(MainActivity.this, OfflineActivity.class);
-        startActivity(intent);
+        startActivity(new Intent(MainActivity.this, OfflineActivity.class));
+      case R.id.test_button:
+        startActivity(new Intent(MainActivity.this, HttpTestActivity.class));
     }
   }
 }
