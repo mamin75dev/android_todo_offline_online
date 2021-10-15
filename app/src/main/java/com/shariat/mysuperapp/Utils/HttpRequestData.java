@@ -66,8 +66,8 @@ public class HttpRequestData {
         builder.append(key);
         builder.append("=");
         builder.append(URLEncoder.encode(this.parameters.get(key), "UTF-8"));
-        return builder.toString();
       }
+      return builder.toString();
     } catch (UnsupportedEncodingException e) {
       e.printStackTrace();
     }

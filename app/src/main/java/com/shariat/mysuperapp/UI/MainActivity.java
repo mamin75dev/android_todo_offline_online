@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     findViewById(R.id.online).setOnClickListener(this);
     findViewById(R.id.offline).setOnClickListener(this);
     findViewById(R.id.test_button).setOnClickListener(this);
+    findViewById(R.id.volley_button).setOnClickListener(this);
   }
 
   @Override
@@ -28,8 +29,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         break;
       case R.id.offline:
         startActivity(new Intent(MainActivity.this, OfflineActivity.class));
+        break;
       case R.id.test_button:
         startActivity(new Intent(MainActivity.this, HttpTestActivity.class));
+        break;
+      case R.id.volley_button:
+        startActivity(new Intent(MainActivity.this, VolleyActivity.class));
+        break;
     }
   }
 }

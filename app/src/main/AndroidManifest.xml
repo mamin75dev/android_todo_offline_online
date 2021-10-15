@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MySuperApp">
-        <activity android:name=".UI.HttpTestActivity"></activity>
+        <activity android:name=".UI.VolleyActivity"></activity>
+        <activity android:name=".UI.HttpTestActivity" />
         <activity android:name=".UI.AddToDoOnlineActivity" />
         <activity android:name=".UI.OnlineActivity" />
         <activity android:name=".UI.AddToDoOfflineActivity" />
