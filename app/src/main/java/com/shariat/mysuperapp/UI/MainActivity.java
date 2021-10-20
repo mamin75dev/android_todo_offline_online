@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     findViewById(R.id.offline).setOnClickListener(this);
     findViewById(R.id.test_button).setOnClickListener(this);
     findViewById(R.id.volley_button).setOnClickListener(this);
+    findViewById(R.id.weather_button).setOnClickListener(this);
   }
 
   @Override
@@ -35,6 +36,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         break;
       case R.id.volley_button:
         startActivity(new Intent(MainActivity.this, VolleyActivity.class));
+        break;
+      case R.id.weather_button:
+        startActivity(new Intent(MainActivity.this, WeatherActivity.class));
         break;
     }
   }

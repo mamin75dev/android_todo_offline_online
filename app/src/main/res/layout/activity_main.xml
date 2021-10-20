@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.MainActivity"
-    android:background="#333">
+    android:background="#333"
+    tools:context=".UI.MainActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -19,9 +19,8 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="16dp"
-            android:text="Use Offline"
             android:background="@drawable/offline_use_button"
-            />
+            android:text="Use Offline" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/online"
@@ -30,9 +29,8 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:text="Use Online"
             android:background="@drawable/online_use_button"
-            />
+            android:text="Use Online" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/test_button"
@@ -41,9 +39,8 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:text="Use Test"
             android:background="@drawable/test_button"
-            />
+            android:text="Use Test" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/volley_button"
@@ -51,9 +48,18 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
-            android:text="Use Volley"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/vollty_button"
-            />
+            android:text="Use Volley" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/weather_button"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/weather_button"
+            android:text="Weather Forecast" />
 
     </LinearLayout>
 
