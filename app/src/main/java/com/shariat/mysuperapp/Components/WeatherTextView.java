@@ -35,19 +35,20 @@ public class WeatherTextView extends AppCompatTextView {
     String weatherIconCode = "";
     if (weatherId == 800) {
       weatherIconCode = getResources().getString(R.string.wi_forecast_io_clear_day);
-    }
-    switch (weatherId / 100) {
-      case 2:
-        weatherIconCode = getResources().getString(R.string.wi_day_thunderstorm);
-      case 3:
-      case 5:
-        weatherIconCode = getResources().getString(R.string.wi_day_rain);
-      case 6:
-        weatherIconCode = getResources().getString(R.string.wi_day_snow);
-      case 7:
-        weatherIconCode = getResources().getString(R.string.wi_forecast_io_clear_day);
-      case 8:
-        weatherIconCode = getResources().getString(R.string.wi_day_cloudy);
+    } else {
+      switch (weatherId / 100) {
+        case 2:
+          weatherIconCode = getResources().getString(R.string.wi_day_thunderstorm);
+        case 3:
+        case 5:
+          weatherIconCode = getResources().getString(R.string.wi_day_rain);
+        case 6:
+          weatherIconCode = getResources().getString(R.string.wi_day_snow);
+        case 7:
+          weatherIconCode = getResources().getString(R.string.wi_forecast_io_clear_day);
+        case 8:
+          weatherIconCode = getResources().getString(R.string.wi_day_cloudy);
+      }
     }
     this.setText(Html.fromHtml(weatherIconCode));
   }

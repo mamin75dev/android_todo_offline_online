@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -34,8 +35,27 @@ public class WeatherFragment extends Fragment {
   ProgressBar progressBar;
 
   private final String LOG_TAG = this.getClass().getSimpleName();
-
+  private String city;
   private RequestQueue queue;
+
+  public static WeatherFragment newInstance(String city) {
+    WeatherFragment fragment = new WeatherFragment();
+    Bundle args = new Bundle();
+    args.putString("city", city);
+    fragment.setArguments(args);
+    return fragment;
+  }
+
+  @Override
+  public void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    this.city = getArguments().getString("city");
+    if (city == null) {
+      this.city = "Tehran";
+    }
+    queue = Volley.newRequestQueue(getContext());
+    requestData(this.city);
+  }
 
   @Nullable
   @Override
@@ -51,14 +71,22 @@ public class WeatherFragment extends Fragment {
     windImage = view.findViewById(R.id.wind_img);
     humidityImage = view.findViewById(R.id.humidity_img);
     progressBar = view.findViewById(R.id.progress_bar);
-    queue = Volley.newRequestQueue(getContext());
-//    setData();
-    requestData("Tehran");
     return view;
   }
 
-  private void setData() {
-    weatherTV.setText(Html.fromHtml(getResources().getString(R.string.wi_forecast_io_clear_day)));
+  private void setData(JSONObject response) {
+    try {
+      cityTV.setText(response.getString("name") + ", " + response.getJSONObject("sys").getString("country"));
+      windSpeedTV.setText(response.getJSONObject("wind").getInt("speed") + " m/s");
+      JSONObject weatherCondition = response.getJSONArray("weather").getJSONObject(0);
+      JSONObject mainCondition = response.getJSONObject("main");
+      descTV.setText(weatherCondition.getString("main"));
+      weatherTV.setWeatherIcon(weatherCondition.getInt("id"));
+      humidityTV.setText(mainCondition.getInt("humidity") + "%");
+      degreeTV.setText(mainCondition.getInt("temp") + " " + Html.fromHtml("&#8451;"));
+    } catch (JSONException e) {
+      e.printStackTrace();
+    }
   }
 
   private void requestData(String city) {
@@ -69,21 +97,10 @@ public class WeatherFragment extends Fragment {
         new Response.Listener<JSONObject>() {
           @Override
           public void onResponse(JSONObject response) {
-            try {
-              windImage.setVisibility(View.VISIBLE);
-              humidityImage.setVisibility(View.VISIBLE);
-              progressBar.setVisibility(View.GONE);
-              cityTV.setText(response.getString("name") + ", " + response.getJSONObject("sys").getString("country"));
-              windSpeedTV.setText(response.getJSONObject("wind").getInt("speed") + " m/s");
-              JSONObject weatherCondition = response.getJSONArray("weather").getJSONObject(0);
-              JSONObject mainCondition = response.getJSONObject("main");
-              descTV.setText(weatherCondition.getString("main"));
-              weatherTV.setWeatherIcon(weatherCondition.getInt("id"));
-              humidityTV.setText(mainCondition.getInt("humidity") + "%");
-              degreeTV.setText(mainCondition.getInt("temp") + " " + Html.fromHtml("&#8451;"));
-            } catch (JSONException e) {
-              e.printStackTrace();
-            }
+            windImage.setVisibility(View.VISIBLE);
+            humidityImage.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.GONE);
+            setData(response);
           }
         },
         new Response.ErrorListener() {
