@@ -13,6 +13,6 @@ public class WeatherActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_weather);
 
-    getSupportFragmentManager().beginTransaction().add(R.id.weather_fragment, WeatherFragment.newInstance("New York")).commit();
+    getSupportFragmentManager().beginTransaction().add(R.id.weather_fragment, WeatherFragment.newInstance("London")).commit();
   }
 }

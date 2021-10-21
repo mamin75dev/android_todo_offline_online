@@ -1,12 +1,15 @@
 package com.shariat.mysuperapp.UI;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -27,11 +30,13 @@ import com.shariat.mysuperapp.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.InputStream;
+
 public class WeatherFragment extends Fragment {
 
   TextView cityTV, degreeTV, humidityTV, timeTV, descTV, windSpeedTV;
   WeatherTextView weatherTV;
-  ImageView windImage, humidityImage;
+  ImageView windImage, humidityImage, weatherImage;
   ProgressBar progressBar;
 
   private final String LOG_TAG = this.getClass().getSimpleName();
@@ -59,10 +64,15 @@ public class WeatherFragment extends Fragment {
 
   @Nullable
   @Override
-  public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+  public View onCreateView(
+      @NonNull LayoutInflater inflater,
+      @Nullable ViewGroup container,
+      @Nullable Bundle savedInstanceState
+  ) {
     View view = inflater.inflate(R.layout.weather_card, container, false);
     cityTV = view.findViewById(R.id.city_tv);
-    weatherTV = view.findViewById(R.id.weather_tv);
+//    weatherTV = view.findViewById(R.id.weather_tv);
+    weatherImage = view.findViewById(R.id.weather_img);
     degreeTV = view.findViewById(R.id.degree_tv);
     humidityTV = view.findViewById(R.id.humidity_tv);
 //    timeTV = view.findViewById(R.id.time_tv);
@@ -81,7 +91,8 @@ public class WeatherFragment extends Fragment {
       JSONObject weatherCondition = response.getJSONArray("weather").getJSONObject(0);
       JSONObject mainCondition = response.getJSONObject("main");
       descTV.setText(weatherCondition.getString("main"));
-      weatherTV.setWeatherIcon(weatherCondition.getInt("id"));
+//      weatherTV.setWeatherIcon(weatherCondition.getInt("id"));
+      new DownloadImageTask(weatherImage).execute(String.format(RequestFetchWeatherData.ICON_URL_FORMAT, weatherCondition.getString("icon")));
       humidityTV.setText(mainCondition.getInt("humidity") + "%");
       degreeTV.setText(mainCondition.getInt("temp") + " " + Html.fromHtml("&#8451;"));
     } catch (JSONException e) {
@@ -112,4 +123,30 @@ public class WeatherFragment extends Fragment {
     );
     queue.add(request);
   }
+
+  private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+    ImageView bmImage;
+
+    public DownloadImageTask(ImageView bmImage) {
+      this.bmImage = bmImage;
+    }
+
+    protected Bitmap doInBackground(String... urls) {
+      String urlDisplay = urls[0];
+      Bitmap icon = null;
+      try {
+        InputStream in = new java.net.URL(urlDisplay).openStream();
+        icon = BitmapFactory.decodeStream(in);
+      } catch (Exception e) {
+        Log.e("Error", e.getMessage());
+        e.printStackTrace();
+      }
+      return icon;
+    }
+
+    protected void onPostExecute(Bitmap result) {
+      bmImage.setImageBitmap(result);
+    }
+  }
+
 }

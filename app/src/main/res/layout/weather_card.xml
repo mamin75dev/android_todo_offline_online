@@ -130,16 +130,27 @@
         <!--            android:textColor="@color/white"-->
         <!--            android:textSize="20sp" />-->
 
-        <com.shariat.mysuperapp.Components.WeatherTextView
-            android:id="@+id/weather_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+<!--        <com.shariat.mysuperapp.Components.WeatherTextView-->
+<!--            android:id="@+id/weather_tv"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentTop="true"-->
+<!--            android:layout_alignParentRight="true"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:layout_marginRight="36dp"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="60sp" />-->
+
+        <ImageView
+            android:id="@+id/weather_img"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_marginTop="16dp"
             android:layout_marginRight="36dp"
-            android:textColor="@color/white"
-            android:textSize="60sp" />
+            />
+
 
         <ProgressBar
             android:id="@+id/progress_bar"
