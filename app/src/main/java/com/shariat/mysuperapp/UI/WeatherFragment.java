@@ -19,6 +19,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.shariat.mysuperapp.Components.WeatherTextView;
 import com.shariat.mysuperapp.Data.RequestFetchWeatherData;
 import com.shariat.mysuperapp.R;
 
@@ -27,7 +28,8 @@ import org.json.JSONObject;
 
 public class WeatherFragment extends Fragment {
 
-  TextView cityTV, weatherTV, degreeTV, humidityTV, timeTV, descTV, windSpeedTV;
+  TextView cityTV, degreeTV, humidityTV, timeTV, descTV, windSpeedTV;
+  WeatherTextView weatherTV;
   ImageView windImage, humidityImage;
   ProgressBar progressBar;
 
@@ -72,17 +74,13 @@ public class WeatherFragment extends Fragment {
               humidityImage.setVisibility(View.VISIBLE);
               progressBar.setVisibility(View.GONE);
               cityTV.setText(response.getString("name") + ", " + response.getJSONObject("sys").getString("country"));
-              descTV.setText(response.getJSONArray("weather").getJSONObject(0).getString("main"));
-              weatherTV.setText(
-                  getWeatherConditionBaseOnWeatherID(
-                      response.getJSONArray("weather").getJSONObject(0).getInt("id")
-                  )
-              );
-              humidityTV.setText(response.getJSONObject("main").getInt("humidity") + "%");
               windSpeedTV.setText(response.getJSONObject("wind").getInt("speed") + " m/s");
-              degreeTV.setText(
-                  response.getJSONObject("main").getInt("temp") + " " + Html.fromHtml("&#8451;")
-              );
+              JSONObject weatherCondition = response.getJSONArray("weather").getJSONObject(0);
+              JSONObject mainCondition = response.getJSONObject("main");
+              descTV.setText(weatherCondition.getString("main"));
+              weatherTV.setWeatherIcon(weatherCondition.getInt("id"));
+              humidityTV.setText(mainCondition.getInt("humidity") + "%");
+              degreeTV.setText(mainCondition.getInt("temp") + " " + Html.fromHtml("&#8451;"));
             } catch (JSONException e) {
               e.printStackTrace();
             }
@@ -96,26 +94,5 @@ public class WeatherFragment extends Fragment {
         }
     );
     queue.add(request);
-  }
-
-  private String getWeatherConditionBaseOnWeatherID(int weatherId) {
-    if (weatherId == 800) {
-      return getResources().getString(R.string.wi_forecast_io_clear_day);
-    }
-    switch ((int) Math.floor(weatherId / 100)) {
-      case 2:
-        return getResources().getString(R.string.wi_day_thunderstorm);
-      case 3:
-      case 5:
-        return getResources().getString(R.string.wi_day_rain);
-      case 6:
-        return getResources().getString(R.string.wi_day_snow);
-      case 7:
-        return getResources().getString(R.string.wi_forecast_io_clear_day);
-      case 8:
-        return getResources().getString(R.string.wi_day_cloudy);
-      default:
-        return "";
-    }
   }
 }
