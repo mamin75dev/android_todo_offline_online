@@ -12,7 +12,7 @@ import java.util.Locale;
 public class RequestFetchWeatherData extends JsonObjectRequest {
 
   public static final String APP_KEY = "734adc24ded4d6f5b88e0ec4c23dba8b";
-  public static final String URL_FORMAT = "http://api.openweathermap.org/data/2.5/weather?q=%s&appid=" + APP_KEY;
+  public static final String URL_FORMAT = "http://api.openweathermap.org/data/2.5/weather?q=%s&units=metric&appid=" + APP_KEY;
 
   public RequestFetchWeatherData(
       int method,

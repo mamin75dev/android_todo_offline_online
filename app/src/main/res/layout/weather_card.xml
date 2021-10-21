@@ -13,6 +13,13 @@
         android:layout_height="match_parent"
         android:paddingLeft="36dp">
 
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:alpha="0.3"
+            android:src="@drawable/eiffel" />
+
         <TextView
             android:id="@+id/city_tv"
             android:layout_width="wrap_content"
@@ -20,10 +27,19 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="16dp"
-            android:text="Tehran, IR"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/desc_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/city_tv"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="2dp"
+            android:textColor="#DFDFDF"
+            android:textSize="18sp" />
 
         <LinearLayout
             android:id="@+id/degree_and_humidity_container"
@@ -38,9 +54,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="26"
                 android:textColor="@color/white"
-                android:textSize="40sp" />
+                android:textSize="36sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -50,11 +65,13 @@
                 android:layout_marginTop="4dp">
 
                 <ImageView
+                    android:id="@+id/humidity_img"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_gravity="bottom"
                     android:layout_marginBottom="4dp"
-                    android:src="@drawable/umbrella" />
+                    android:src="@drawable/umbrella"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/humidity_tv"
@@ -63,33 +80,55 @@
                     android:layout_alignTop="@id/degree_tv"
                     android:layout_gravity="bottom"
                     android:layout_marginLeft="6dp"
-                    android:text="100%"
                     android:textColor="#BFBFBF"
                     android:textSize="20sp" />
 
 
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="4dp">
+
+                <ImageView
+                    android:id="@+id/wind_img"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="4dp"
+                    android:src="@drawable/wind"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/wind_speed_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/degree_tv"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="6dp"
+                    android:textColor="#BFBFBF"
+                    android:textSize="20sp" />
+
+
+            </LinearLayout>
+
         </LinearLayout>
 
-        <ImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_alignParentRight="true"
-            android:alpha="0.3"
-            android:src="@drawable/eiffel" />
-
-        <TextView
-            android:id="@+id/time_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/degree_and_humidity_container"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="36dp"
-            android:layout_marginBottom="2dp"
-            android:text="20:21"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+        <!--        <TextView-->
+        <!--            android:id="@+id/time_tv"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_alignBottom="@id/degree_and_humidity_container"-->
+        <!--            android:layout_alignParentRight="true"-->
+        <!--            android:layout_marginRight="36dp"-->
+        <!--            android:layout_marginBottom="2dp"-->
+        <!--            android:text="20:21"-->
+        <!--            android:textAlignment="center"-->
+        <!--            android:textColor="@color/white"-->
+        <!--            android:textSize="20sp" />-->
 
         <com.shariat.mysuperapp.Components.WeatherTextView
             android:id="@+id/weather_tv"
@@ -103,11 +142,11 @@
             android:textSize="60sp" />
 
         <ProgressBar
+            android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:indeterminateTint="@color/white"
-            android:visibility="gone" />
+            android:indeterminateTint="@color/white" />
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
