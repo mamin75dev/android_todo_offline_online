@@ -1,10 +1,6 @@
-package com.shariat.mysuperapp.UI;
+package com.shariat.mysuperapp.Data;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
+import android.content.Context;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -12,40 +8,37 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.shariat.mysuperapp.Models.City;
-import com.shariat.mysuperapp.R;
-import com.shariat.mysuperapp.Utils.CityRVAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class WeatherActivity extends AppCompatActivity {
-
+public class CityRequestHelper {
   private static final String CITIES_BASE_URL = "http://10.0.2.2:8000/api/cities/";
-  private ArrayList<City> cityList;
-  private RequestQueue queue;
-  private CityRVAdapter adapter;
-  private RecyclerView cityRecyclerView;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_weather);
-    cityRecyclerView = findViewById(R.id.cities_recycler_view);
-    this.queue = Volley.newRequestQueue(this);
-    cityList = new ArrayList<>();
-    requestCitiesData();
-    adapter = new CityRVAdapter(cityList, this);
-    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-    cityRecyclerView.setLayoutManager(linearLayoutManager);
-    cityRecyclerView.setAdapter(adapter);
+  private RequestQueue queue;
+  private List<City> citiesList;
+
+  public CityRequestHelper(Context context) {
+    this.queue = Volley.newRequestQueue(context);
+    citiesList = new ArrayList<>();
   }
 
-  private void requestCitiesData() {
+  public void setCitiesList(List<City> citiesList) {
+    this.citiesList = citiesList;
+  }
+
+  public List<City> getCitiesList() {
+    return citiesList;
+  }
+
+  public void getCities() {
     String url = CITIES_BASE_URL + "all";
     JsonArrayRequest request = new JsonArrayRequest(
         Request.Method.GET,
@@ -58,8 +51,7 @@ public class WeatherActivity extends AppCompatActivity {
             for (int i = 0; i < response.length(); i++) {
               try {
                 JSONObject obj = response.getJSONObject(i);
-                cityList.add(City.convertJsonObjectToCity(obj));
-                adapter.notifyDataSetChanged();
+                citiesList.add(City.convertJsonObjectToCity(obj));
               } catch (JSONException e) {
                 e.printStackTrace();
               }
@@ -73,5 +65,29 @@ public class WeatherActivity extends AppCompatActivity {
           }
         });
     queue.add(request);
+  }
+
+  public City getCityDetails(long id) {
+    String url = CITIES_BASE_URL + id;
+    final City[] city = {null};
+    JsonObjectRequest request = new JsonObjectRequest(
+        Request.Method.GET,
+        url,
+        null,
+        new Response.Listener<JSONObject>() {
+          @Override
+          public void onResponse(JSONObject response) {
+            city[0] = City.convertJsonObjectToCity(response);
+          }
+        },
+        new Response.ErrorListener() {
+          @Override
+          public void onErrorResponse(VolleyError error) {
+            Log.i("city_error", error.getMessage());
+          }
+        });
+
+    queue.add(request);
+    return city[0];
   }
 }

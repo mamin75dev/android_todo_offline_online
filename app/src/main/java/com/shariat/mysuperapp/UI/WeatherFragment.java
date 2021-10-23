@@ -24,13 +24,16 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.shariat.mysuperapp.Components.WeatherTextView;
+import com.shariat.mysuperapp.Data.CityRequestHelper;
 import com.shariat.mysuperapp.Data.RequestFetchWeatherData;
+import com.shariat.mysuperapp.Models.City;
 import com.shariat.mysuperapp.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.InputStream;
+import java.util.List;
 
 public class WeatherFragment extends Fragment {
 

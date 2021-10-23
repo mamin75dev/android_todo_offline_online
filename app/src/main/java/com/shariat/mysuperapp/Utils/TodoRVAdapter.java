@@ -31,7 +31,9 @@ public class TodoRVAdapter extends RecyclerView.Adapter<TodoRVAdapter.ViewHolder
   @NonNull
   @Override
   public TodoRVAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-    return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.todo_list_item, parent, false));
+    return new ViewHolder(LayoutInflater.from(parent.getContext())
+        .inflate(R.layout.todo_list_item, parent, false)
+    );
   }
 
   @Override
